@@ -12,4 +12,7 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - test
+      - test:
+        filters:
+          branches:
+            only: main
