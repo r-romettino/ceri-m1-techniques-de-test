@@ -35,9 +35,7 @@ public class IPokemonMetadataProviderTest {
 
         assertThrows(
             PokedexException.class,
-            () -> {
-                pokemonMetadataProvider.getPokemonMetadata(255);
-            },
+            () -> pokemonMetadataProvider.getPokemonMetadata(255),
             "No pokemon exists with index 255"
         );
     }

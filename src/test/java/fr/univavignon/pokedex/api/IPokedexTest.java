@@ -67,9 +67,7 @@ public class IPokedexTest {
 
         assertThrows(
             PokedexException.class,
-            () -> {
-                pokedex.getPokemon(0);
-            },
+            () -> pokedex.getPokemon(0),
             "Pokemon not found"
         );
     }
@@ -84,7 +82,7 @@ public class IPokedexTest {
     }
 
     @Test
-    void testGetSortedPokemon() throws PokedexException {
+    void testGetSortedPokemon() {
         when(pokedex.getPokemons(PokemonComparators.NAME)).thenReturn(
                 Arrays.asList(exampleAquali, exampleBulbizarre)
         );
