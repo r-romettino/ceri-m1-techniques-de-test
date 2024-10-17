@@ -10,8 +10,8 @@ import static org.mockito.Mockito.*;
 
 public class IPokedexTest {
     IPokedex pokedex;
-    Pokemon examplePokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56d);
-    Pokemon examplePokemon2 = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100d);
+    final Pokemon examplePokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56d);
+    final Pokemon examplePokemon2 = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100d);
 
     @BeforeEach
     void createPokedex() {
