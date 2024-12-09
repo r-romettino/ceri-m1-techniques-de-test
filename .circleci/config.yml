@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  codecov: codecov/codecov@5
 jobs:
   test:
     docker:
@@ -16,3 +18,4 @@ workflows:
         filters:
           branches:
             only: main
+      - codecov/upload
