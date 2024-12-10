@@ -8,21 +8,14 @@ import static org.mockito.Mockito.*;
 
 public class IPokemonFactoryTest {
     IPokemonFactory pokemonFactory;
-    final Pokemon expectedBulbizarre = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56d);
-    final Pokemon expectedAquali = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100d);
 
     @BeforeEach
     void createPokemonFactory() {
-        pokemonFactory = mock(IPokemonFactory.class);
+        pokemonFactory = new PokemonFactory();
     }
 
     @Test
     void createPokemon() {
-        when(pokemonFactory.createPokemon(0, 613, 64, 4000, 4))
-            .thenReturn(expectedBulbizarre);
-        when(pokemonFactory.createPokemon(133, 2729, 202, 5000, 4))
-            .thenReturn(expectedAquali);
-
         Pokemon actualBulbizarre = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
         assertEquals(613, actualBulbizarre.getCp());
         assertEquals(64, actualBulbizarre.getHp());
