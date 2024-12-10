@@ -10,12 +10,14 @@ import static org.mockito.Mockito.*;
 
 public class IPokedexTest {
     IPokedex pokedex;
+    PokemonMetadataProvider pokemonMetadataProvider = new PokemonMetadataProvider();
+    PokemonFactory pokemonFactory = new PokemonFactory();
     final Pokemon exampleBulbizarre = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56d);
     final Pokemon exampleAquali = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100d);
 
     @BeforeEach
     void createPokedex() {
-        pokedex = new Pokedex();
+        pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
     }
 
     @Test
@@ -49,7 +51,7 @@ public class IPokedexTest {
     }
 
     @Test
-    void testGetNotExistingPokemonThrowsError() throws PokedexException {
+    void testGetNotExistingPokemonThrowsError() {
         assertThrows(
             PokedexException.class,
             () -> pokedex.getPokemon(0),

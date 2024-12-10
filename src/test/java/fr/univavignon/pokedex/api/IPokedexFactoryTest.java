@@ -8,20 +8,18 @@ import static org.mockito.Mockito.*;
 
 public class IPokedexFactoryTest {
     IPokedexFactory pokedexFactory;
-    final IPokemonMetadataProvider pokemonMetadataProvider = mock(IPokemonMetadataProvider.class);
-    final IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
-    final IPokedex pokedex = mock(IPokedex.class);
+    final IPokemonMetadataProvider pokemonMetadataProvider = new PokemonMetadataProvider();
+    final IPokemonFactory pokemonFactory = new PokemonFactory();
 
     @BeforeEach
     void createPokedexFactory() {
-        pokedexFactory = mock(IPokedexFactory.class);
+        pokedexFactory = new PokedexFactory();
     }
 
     @Test
     void createPokedex() {
-        when(pokedexFactory.createPokedex(pokemonMetadataProvider, pokemonFactory))
-            .thenReturn(pokedex);
+        IPokedex pokedex = pokedexFactory.createPokedex(pokemonMetadataProvider, pokemonFactory);
 
-        assertEquals(pokedex, pokedexFactory.createPokedex(pokemonMetadataProvider, pokemonFactory));
+        assertNotNull(pokedex);
     }
 }
