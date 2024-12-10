@@ -11,19 +11,11 @@ public class IPokemonMetadataProviderTest {
 
     @BeforeEach
     void createPokemonMetadataProvider() {
-        pokemonMetadataProvider = mock(IPokemonMetadataProvider.class);
+        pokemonMetadataProvider = new PokemonMetadataProvider();
     }
 
     @Test
     void getMetadata() throws PokedexException {
-        PokemonMetadata expectedBulbizarreMetadata = new PokemonMetadata(0, "Bulbizarre", 126, 126, 90);
-        PokemonMetadata expectedAqualiMetadata = new PokemonMetadata(133, "Aquali", 186, 168, 260);
-
-        when(pokemonMetadataProvider.getPokemonMetadata(0))
-            .thenReturn(expectedBulbizarreMetadata);
-        when(pokemonMetadataProvider.getPokemonMetadata(133))
-            .thenReturn(expectedAqualiMetadata);
-
         PokemonMetadata actualBulbizarreMetadata = pokemonMetadataProvider.getPokemonMetadata(0);
         assertEquals(0, actualBulbizarreMetadata.getIndex());
         assertEquals("Bulbizarre", actualBulbizarreMetadata.getName());
@@ -41,9 +33,6 @@ public class IPokemonMetadataProviderTest {
 
     @Test
     void getNotExistingPokemonMetadataThrowsException() throws PokedexException {
-        when(pokemonMetadataProvider.getPokemonMetadata(255))
-            .thenThrow(new PokedexException("No pokemon exists with index 255"));
-
         assertThrows(
             PokedexException.class,
             () -> pokemonMetadataProvider.getPokemonMetadata(255),
