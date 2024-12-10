@@ -29,6 +29,11 @@
       <version>3.6.0</version>
     </dependency>
     <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+      <version>3.11.2</version>
+    </dependency>
+    <dependency>
       <groupId>com.github.bordertech.buildtools</groupId>
       <artifactId>badger</artifactId>
       <version>1.0.0</version>
@@ -91,6 +96,24 @@
                 <inputFile>target/site/checkstyle/checkstyle-result.xml</inputFile>
               </inputFiles>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.11.2</version>
+        <configuration>
+          <show>private</show>
+          <failOnError>false</failOnError>
+        </configuration>
+        <executions>
+          <execution>
+            <id>javadoc</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>javadoc</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
