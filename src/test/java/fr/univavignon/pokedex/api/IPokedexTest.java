@@ -15,16 +15,11 @@ public class IPokedexTest {
 
     @BeforeEach
     void createPokedex() {
-        pokedex = mock(IPokedex.class);
+        pokedex = new Pokedex();
     }
 
     @Test
     void testAddPokemon() {
-        when(pokedex.getPokemons())
-            .thenReturn(Arrays.asList())
-            .thenReturn(Arrays.asList(exampleBulbizarre))
-            .thenReturn(Arrays.asList(exampleBulbizarre, exampleAquali));
-
         assertEquals(Arrays.asList(), pokedex.getPokemons());
 
         pokedex.addPokemon(exampleBulbizarre);
@@ -36,20 +31,12 @@ public class IPokedexTest {
 
     @Test
     void testAddPokemonReturnValue() {
-        when(pokedex.addPokemon(exampleBulbizarre)).thenReturn(0);
-        when(pokedex.addPokemon(exampleAquali)).thenReturn(1);
-
         assertEquals(0, pokedex.addPokemon(exampleBulbizarre));
         assertEquals(1, pokedex.addPokemon(exampleAquali));
     }
 
     @Test
     void testGetNumberOfPokemon() {
-        when(pokedex.size())
-            .thenReturn(0)
-            .thenReturn(1)
-            .thenReturn(2);
-
         assertEquals( 0, pokedex.size());
 
         pokedex.addPokemon(exampleBulbizarre);
@@ -63,8 +50,6 @@ public class IPokedexTest {
 
     @Test
     void testGetNotExistingPokemonThrowsError() throws PokedexException {
-        when(pokedex.getPokemon(0)).thenThrow(new PokedexException("Pokemon not found"));
-
         assertThrows(
             PokedexException.class,
             () -> pokedex.getPokemon(0),
@@ -74,8 +59,8 @@ public class IPokedexTest {
 
     @Test
     void testGetPokemon() throws PokedexException {
-        when(pokedex.getPokemon(0)).thenReturn(exampleBulbizarre);
-        when(pokedex.getPokemon(1)).thenReturn(exampleAquali);
+        pokedex.addPokemon(exampleBulbizarre);
+        pokedex.addPokemon(exampleAquali);
 
         assertEquals(exampleBulbizarre, pokedex.getPokemon(0));
         assertEquals(exampleAquali, pokedex.getPokemon(1));
@@ -83,12 +68,8 @@ public class IPokedexTest {
 
     @Test
     void testGetSortedPokemon() {
-        when(pokedex.getPokemons(PokemonComparators.NAME)).thenReturn(
-                Arrays.asList(exampleAquali, exampleBulbizarre)
-        );
-        when(pokedex.getPokemons(PokemonComparators.INDEX)).thenReturn(
-                Arrays.asList(exampleBulbizarre, exampleAquali)
-        );
+        pokedex.addPokemon(exampleBulbizarre);
+        pokedex.addPokemon(exampleAquali);
 
         assertEquals(
                 Arrays.asList(exampleAquali, exampleBulbizarre),
