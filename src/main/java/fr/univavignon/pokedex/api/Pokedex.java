@@ -58,12 +58,4 @@ public class Pokedex implements IPokedex {
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
         return pokemonMetadataProvider.getPokemonMetadata(index);
     }
-
-    public PokemonFactory getPokemonFactory() {
-        return pokemonFactory;
-    }
-
-    public PokemonMetadataProvider getPokemonMetadataProvider() {
-        return pokemonMetadataProvider;
-    }
 }

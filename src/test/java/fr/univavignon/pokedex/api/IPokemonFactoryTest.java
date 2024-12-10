@@ -30,4 +30,10 @@ public class IPokemonFactoryTest {
         assertEquals(4, actualAquali.getCandy());
         assertEquals(100d, actualAquali.getIv());
     }
+
+    @Test
+    void createUnknownPokemon() {
+        Pokemon actualPokemon = pokemonFactory.createPokemon(12, 613, 64, 4000, 4);
+        assertNull(actualPokemon);
+    }
 }

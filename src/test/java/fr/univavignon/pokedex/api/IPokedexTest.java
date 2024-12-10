@@ -82,4 +82,46 @@ public class IPokedexTest {
                 pokedex.getPokemons(PokemonComparators.INDEX)
         );
     }
+
+    @Test
+    void getOOBPokemon() {
+        pokedex.addPokemon(exampleBulbizarre);
+        pokedex.addPokemon(exampleAquali);
+
+        assertThrows(
+                PokedexException.class,
+                () -> pokedex.getPokemon(-1),
+                "Pokemon not found"
+        );
+
+        assertThrows(
+                PokedexException.class,
+                () -> pokedex.getPokemon(2),
+                "Pokemon not found"
+        );
+    }
+
+    @Test
+    void createPokemon() {
+        Pokemon actualPokemon = pokedex.createPokemon(0, 11, 12, 13, 14);
+        assertEquals(0, actualPokemon.getIndex());
+        assertEquals(11, actualPokemon.getCp());
+        assertEquals(12, actualPokemon.getHp());
+        assertEquals(13, actualPokemon.getDust());
+        assertEquals(14, actualPokemon.getCandy());
+    }
+
+    @Test
+    void getPokemonMetadata() throws PokedexException {
+        PokemonMetadata pokemonMetadata = pokedex.getPokemonMetadata(0);
+    }
+
+    @Test
+    void getUnknownPokemonMetadataThrows() {
+        assertThrows(
+                PokedexException.class,
+                () -> pokedex.getPokemonMetadata(39),
+                "Pokemon not found"
+        );
+    }
 }
