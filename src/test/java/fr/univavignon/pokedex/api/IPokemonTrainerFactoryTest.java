@@ -10,7 +10,7 @@ public class IPokemonTrainerFactoryTest {
     IPokemonTrainerFactory pokemonTrainerFactory;
     final IPokedexFactory pokedexFactory = mock(IPokedexFactory.class);
     final IPokedex pokedex = mock(IPokedex.class);
-    final PokemonTrainer pokemonTrainer = new PokemonTrainer("José", Team.INSTINCT, pokedex);
+    final PokemonTrainer expectedPokemonTrainer = new PokemonTrainer("José", Team.INSTINCT, pokedex);
 
     @BeforeEach
     void createPokemonTrainerFactory() {
@@ -20,10 +20,11 @@ public class IPokemonTrainerFactoryTest {
     @Test
     void createTrainer() {
         when(pokemonTrainerFactory.createTrainer("José", Team.INSTINCT, pokedexFactory))
-            .thenReturn(pokemonTrainer);
+            .thenReturn(expectedPokemonTrainer);
 
-        assertEquals(
-            pokemonTrainer,
-            pokemonTrainerFactory.createTrainer("José", Team.INSTINCT, pokedexFactory));
+        PokemonTrainer actualTrainer = pokemonTrainerFactory.createTrainer("José", Team.INSTINCT, pokedexFactory);
+        assertEquals("José", actualTrainer.getName());
+        assertEquals(Team.INSTINCT, actualTrainer.getTeam());
+        assertEquals(pokedex, actualTrainer.getPokedex());
     }
 }
