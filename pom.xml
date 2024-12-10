@@ -28,6 +28,11 @@
       <artifactId>maven-checkstyle-plugin</artifactId>
       <version>3.6.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.github.bordertech.buildtools</groupId>
+      <artifactId>badger</artifactId>
+      <version>1.0.0</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -55,7 +60,7 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>3.6.0</version>
         <configuration>
-          <consoleOutput>true</consoleOutput>
+          <consoleOutput>false</consoleOutput>
           <failsOnError>false</failsOnError>
           <outputFile>${basedir}/target/site/checkstyle/checkstyle-result.xml</outputFile>
           <outputFileFormat>xml</outputFileFormat>
@@ -67,6 +72,25 @@
             <goals>
               <goal>checkstyle</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.bordertech.buildtools</groupId>
+        <artifactId>badger</artifactId>
+        <version>1.0.0</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>badges</goal>
+            </goals>
+            <configuration>
+              <outputDir>target/site/badges</outputDir>
+              <inputFiles>
+                <inputFile>target/site/checkstyle/checkstyle-result.xml</inputFile>
+              </inputFiles>
+            </configuration>
           </execution>
         </executions>
       </plugin>

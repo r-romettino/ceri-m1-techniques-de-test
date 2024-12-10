@@ -9,6 +9,8 @@ jobs:
           command: mvn test
       - run:
           command: bash <(curl -s https://codecov.io/bash) -t ${CODECOV_TOKEN} -r r-romettino/ceri-m1-techniques-de-test -f target/site/jacoco/jacoco.xml
+      - run:
+          command: "curl -L -X PATCH -H 'Accept: application/vnd.github+json' -H \"Authorization: Bearer ${GIST_TOKEN}\" -H 'X-GitHub-Api-Version: 2022-11-28' https://api.github.com/gists/f9ec335757ad99f50fb47eaefd8fd91c -d \"{\"files\":{\"badge.svg\":{\"content\":\"$(cat ./target/site/badges/checkstyle-result.svg)\"}}}\""
 workflows:
   build-and-test:
     jobs:
